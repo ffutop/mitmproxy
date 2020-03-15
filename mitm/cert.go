@@ -21,7 +21,7 @@ const (
 	// valid for 1 day
 	certificateMaxAge = 24 * time.Hour
 	// not sure entirely, so set all to make sure it works
-	keyUsage          = x509.KeyUsageCertSign |
+	keyUsage = x509.KeyUsageCertSign |
 		x509.KeyUsageContentCommitment |
 		x509.KeyUsageCRLSign |
 		x509.KeyUsageDataEncipherment |

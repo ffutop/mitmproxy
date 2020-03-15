@@ -74,7 +74,7 @@ func (proxy *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		cTlsConn := tls.Server(cconn, cconfig)
 		defer cTlsConn.Close()
 		if err := cTlsConn.Handshake(); err != nil {
-			log.Fatalln(err)
+			log.Fatalln("maybe you should ensure Root Certificate is trusted by operation system.", err)
 			return
 		}
 
@@ -100,7 +100,7 @@ func (proxy *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				request.URL.Scheme = "https"
 			},
 			Transport: &http.Transport{
-				DialTLS:         func(network, addr string) (n net.Conn, err error) { return sTlsConn, nil },
+				DialTLS: func(network, addr string) (n net.Conn, err error) { return sTlsConn, nil },
 			},
 		}
 		http.Serve(listener, reverseProxy)
