@@ -17,3 +17,6 @@
 # Ignore MacOS and JetBrain auto-generated directories
 .idea
 .DS_Store
+
+# specific for this repository
+config.yaml
