@@ -7,4 +7,6 @@ keyFile: "/Users/ffutop/.mitm/ca-key.pem"
 # Enable debugging information, like NSS Key Log
 debugTLS: true
 # Expose NSS Key Log for trace HTTPS traffic via Wireshark. works only debugTLS is enabled
-tlsKeyLogFile: "/Users/ffutop/.mitm/master-secret.log
+tlsKeyLogFile: "/Users/ffutop/.mitm/master-secret.log"
+# If non-empty, use this log file
+logFile: "/Users/ffutop/.mitm/mitmproxy.log"
