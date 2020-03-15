@@ -1,0 +1,10 @@
+# proxy work on host:port
+addr: "127.0.0.1:53960"
+# Root Certificate File Path
+certFile: "/Users/ffutop/.mitm/ca-cert.pem"
+# Root Certificate Private Key File Path
+keyFile: "/Users/ffutop/.mitm/ca-key.pem"
+# Enable debugging information, like NSS Key Log
+debugTLS: true
+# Expose NSS Key Log for trace HTTPS traffic via Wireshark. works only debugTLS is enabled
+tlsKeyLogFile: "/Users/ffutop/.mitm/master-secret.log
