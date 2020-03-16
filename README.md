@@ -66,5 +66,6 @@ Man-In-The-Middle Proxy aim at expose [NSS Key Log Format](https://developer.moz
 
 ## TODO
 
+- [x] serve both http/https proxy on same port
 - [ ] support auto modify MacOS global proxy config
    
