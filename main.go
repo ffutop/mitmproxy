@@ -4,14 +4,16 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"flag"
+	"github.com/ffutop/mitmproxy/mitm"
+	"github.com/ffutop/mitmproxy/netproxy"
+	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"path/filepath"
-
-	"github.com/ffutop/mitmproxy/mitm"
-	"gopkg.in/yaml.v3"
+	"syscall"
 )
 
 var pwd, _ = os.Getwd()
@@ -66,10 +68,22 @@ func main() {
 		}
 	}
 
-	log.Println("proxy server started on", config.Addr)
-	if err = http.ListenAndServe(config.Addr, srv); err != nil {
+	if err := netproxy.SetupGlobalNetworkProxy(config.Addr); err != nil {
 		log.Fatalln(err)
 	}
+
+	go func() {
+		log.Println("proxy server started on", config.Addr)
+		if err = http.ListenAndServe(config.Addr, srv); err != nil {
+			log.Fatalln(err)
+		}
+	}()
+
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGKILL, syscall.SIGHUP, os.Interrupt)
+	s := <-c
+	log.Println(s)
+	netproxy.ShutdownGlobalNetworkProxy()
 }
 
 // Note: struct fields must be public in order for unmarshal to
