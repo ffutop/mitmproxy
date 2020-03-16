@@ -74,7 +74,7 @@ func (proxy *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		cTlsConn := tls.Server(cconn, cconfig)
 		defer cTlsConn.Close()
 		if err := cTlsConn.Handshake(); err != nil {
-			log.Fatalln("maybe you should ensure Root Certificate is trusted by operation system.", err)
+			log.Println("maybe you should ensure Root Certificate is trusted by operation system.", err)
 			return
 		}
 
