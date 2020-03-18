@@ -89,7 +89,7 @@ func main() {
 // Note: struct fields must be public in order for unmarshal to
 // correctly populate the data.
 type Config struct {
-	Addr          string `yaml:"Addr"`
+	Addr          string `yaml:"addr"`
 	DebugTLS      bool   `yaml:"debugTLS"`
 	CertFile      string `yaml:"certFile"`
 	KeyFile       string `yaml:"keyFile"`
